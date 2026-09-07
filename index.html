@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyHub — Ta'lim platformasi</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =========================
+     AUTH SCREEN
+========================= -->
+
+<div id="authScreen" class="auth-screen">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <div class="logo-icon">S</div>
+            <div>
+                <h1>StudyHub</h1>
+                <span>Kelajak uchun o‘rgan</span>
+            </div>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-auth="login">
+                Kirish
+            </button>
+
+            <button class="auth-tab" data-auth="register">
+                Ro‘yxatdan o‘tish
+            </button>
+        </div>
+
+        <!-- LOGIN -->
+
+        <form id="loginForm" class="auth-form">
+
+            <label>
+                Username
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="username"
+                    required
+                >
+            </label>
+
+            <label>
+                Parol
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="••••••••"
+                    required
+                >
+            </label>
+
+            <button class="primary-btn full-btn" type="submit">
+                Kirish
+            </button>
+
+        </form>
+
+        <!-- REGISTER -->
+
+        <form id="registerForm" class="auth-form hidden">
+
+            <label>
+                Ismingiz
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Ismingiz"
+                    required
+                >
+            </label>
+
+            <label>
+                Username
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="username"
+                    required
+                >
+            </label>
+
+            <label>
+                Parol
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Kamida 4 ta belgi"
+                    required
+                >
+            </label>
+
+            <button class="primary-btn full-btn" type="submit">
+                Akkaunt yaratish
+            </button>
+
+        </form>
+
+        <p class="auth-note">
+            Demo versiya: ma'lumotlar brauzeringizda saqlanadi.
+        </p>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     APP
+========================= -->
+
+<div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div class="brand-text">
+                <strong>StudyHub</strong>
+                <span>Education</span>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>⌂</span>
+                <span>Bosh sahifa</span>
+            </button>
+
+            <button class="nav-item" data-page="lessons">
+                <span>📚</span>
+                <span>Darslar</span>
+            </button>
+
+            <button class="nav-item" data-page="missions">
+                <span>🎯</span>
+                <span>Missiyalar</span>
+            </button>
+
+            <button class="nav-item" data-page="leaderboard">
+                <span>🏆</span>
+                <span>Leaderboard</span>
+            </button>
+
+            <button class="nav-item" data-page="premium">
+                <span>💎</span>
+                <span>Premium</span>
+            </button>
+
+            <button class="nav-item" data-page="ai">
+                <span>🤖</span>
+                <span>Study AI</span>
+            </button>
+
+            <button class="nav-item" data-page="profile">
+                <span>👤</span>
+                <span>Profil</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-streak">
+                <span>🔥</span>
+
+                <div>
+                    <strong id="sideStreak">0 kun</strong>
+                    <small>Streak</small>
+                </div>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">
+                🚪 Chiqish
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button id="menuBtn" class="mobile-menu">
+                ☰
+            </button>
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input
+                    type="search"
+                    id="globalSearch"
+                    placeholder="Dars, mavzu yoki test qidiring..."
+                >
+            </div>
+
+            <div class="top-actions">
+
+                <button id="themeBtn" class="icon-btn" title="Tema">
+                    ☀️
+                </button>
+
+                <button id="colorBtn" class="icon-btn" title="Rang">
+                    🎨
+                </button>
+
+                <button id="notificationBtn" class="icon-btn">
+                    🔔
+                </button>
+
+                <button class="user-mini" data-page="profile">
+
+                    <div class="avatar small" id="topAvatar">
+                        U
+                    </div>
+
+                    <div>
+                        <strong id="topName">
+                            User
+                        </strong>
+
+                        <small id="topUsername">
+                            @user
+                        </small>
+                    </div>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTAINER -->
+
+        <div class="page-container">
+
+
+            <!-- =====================
+                 DASHBOARD
+            ====================== -->
+
+            <section class="page active" id="page-dashboard">
+
+                <div class="welcome">
+
+                    <div>
+                        <span class="eyebrow">
+                            Yaxshi kun! 👋
+                        </span>
+
+                        <h1>
+                            Salom, <span id="welcomeName">Student</span>!
+                        </h1>
+
+                        <p>
+                            Bugun ham bilimlaringizni oshirish uchun ajoyib kun.
+                        </p>
+                    </div>
+
+                    <div class="date-card">
+                        <strong id="todayDate">
+                            Bugun
+                        </strong>
+                        <span>📅</span>
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            ⚡
+                        </div>
+
+                        <div>
+                            <span>XP</span>
+                            <strong id="xpValue">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            🔥
+                        </div>
+
+                        <div>
+                            <span>Streak</span>
+                            <strong id="streakValue">0 kun</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            💎
+                        </div>
+
+                        <div>
+                            <span>Token</span>
+                            <strong id="tokenValue">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            📚
+                        </div>
+
+                        <div>
+                            <span>Darslar</span>
+                            <strong id="completedLessons">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- CONTINUE -->
+
+                <div id="continueSection" class="section-block">
+
+                    <div class="section-title">
+                        <div>
+                            <span class="eyebrow">
+                                O‘qishni davom ettiring
+                            </span>
+
+                            <h2>Davom ettirish</h2>
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-page="lessons"
+                        >
+                            Barcha darslar →
+                        </button>
+                    </div>
+
+                    <div id="continueCard"></div>
+
+                </div>
+
+
+                <!-- DAILY -->
+
+                <div class="section-block">
+
+                    <div class="section-title">
+
+                        <div>
+                            <span class="eyebrow">
+                                Bugungi maqsad
+                            </span>
+
+                            <h2>Kunlik missiyalar</h2>
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-page="missions"
+                        >
+                            Barchasi →
+                        </button>
+
+                    </div>
+
+                    <div class="missions-grid" id="dashboardMissions">
+                    </div>
+
+                </div>
+
+
+                <!-- SUBJECTS -->
+
+                <div class="section-block">
+
+                    <div class="section-title">
+
+                        <div>
+                            <span class="eyebrow">
+                                O‘rganishni boshlang
+                            </span>
+
+                            <h2>Fanlar</h2>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="subject-grid"
+                        id="subjectGrid"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 LESSONS
+            ====================== -->
+
+            <section class="page" id="page-lessons">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            Bilim markazi
+                        </span>
+
+                        <h1>Barcha darslar</h1>
+
+                        <p>
+                            O‘zingizga kerakli fanni tanlang va o‘rganishni boshlang.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="filter-row">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                    >
+                        Barchasi
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="math"
+                    >
+                        Matematika
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="english"
+                    >
+                        Ingliz tili
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="programming"
+                    >
+                        Dasturlash
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="physics"
+                    >
+                        Fizika
+                    </button>
+
+                </div>
+
+                <div
+                    class="lesson-grid"
+                    id="lessonGrid"
+                ></div>
+
+            </section>
+
+
+            <!-- =====================
+                 MISSIONS
+            ====================== -->
+
+            <section class="page" id="page-missions">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            Har kuni ozgina
+                        </span>
+
+                        <h1>Kunlik missiyalar</h1>
+
+                        <p>
+                            Missiyalarni bajaring va XP hamda tokenlar yig‘ing.
+                        </p>
+                    </div>
+
+                    <div class="streak-large">
+                        🔥
+                        <strong id="missionStreak">0</strong>
+                        <span>kunlik streak</span>
+                    </div>
+
+                </div>
+
+                <div
+                    class="missions-list"
+                    id="missionsList"
+                ></div>
+
+            </section>
+
+
+            <!-- =====================
+                 LEADERBOARD
+            ====================== -->
+
+            <section class="page" id="page-leaderboard">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            Eng faol o‘quvchilar
+                        </span>
+
+                        <h1>Leaderboard</h1>
+
+                        <p>
+                            Ko‘proq o‘rganing va reytingda yuqoriga ko‘tariling.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="leaderboard-card">
+
+                    <div class="leader-head">
+                        <span>#</span>
+                        <span>O‘quvchi</span>
+                        <span>XP</span>
+                        <span>Level</span>
+                    </div>
+
+                    <div id="leaderboardList"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 PREMIUM
+            ====================== -->
+
+            <section class="page" id="page-premium">
+
+                <div class="premium-hero">
+
+                    <div>
+
+                        <span class="premium-label">
+                            💎 STUDYHUB PREMIUM
+                        </span>
+
+                        <h1>
+                            O‘rganishni keyingi
+                            bosqichga olib chiqing.
+                        </h1>
+
+                        <p>
+                            Reklamalarsiz ta'lim, kuchli Study AI,
+                            maxsus darslar va ko‘proq imkoniyatlar.
+                        </p>
+
+                        <button
+                            id="premiumBuyBtn"
+                            class="premium-btn"
+                        >
+                            Premium olish
+                        </button>
+
+                    </div>
+
+                    <div class="premium-crown">
+                        💎
+                    </div>
+
+                </div>
+
+
+                <div class="premium-grid">
+
+                    <div class="premium-feature">
+                        <span>🤖</span>
+                        <h3>Advanced Study AI</h3>
+                        <p>
+                            Murakkab savollar uchun kuchli AI yordamchi.
+                        </p>
+                    </div>
+
+                    <div class="premium-feature">
+                        <span>🚀</span>
+                        <h3>Premium darslar</h3>
+                        <p>
+                            Maxsus kurslar va chuqurlashtirilgan mavzular.
+                        </p>
+                    </div>
+
+                    <div class="premium-feature">
+                        <span>⚡</span>
+                        <h3>2x XP</h3>
+                        <p>
+                            Darslardan ikki baravar ko‘proq XP oling.
+                        </p>
+                    </div>
+
+                    <div class="premium-feature">
+                        <span>🎨</span>
+                        <h3>Maxsus dizaynlar</h3>
+                        <p>
+                            Profil va platformani ko‘proq sozlash imkoniyati.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="token-premium">
+
+                    <div>
+                        <span class="eyebrow">
+                            Tokenlar bilan ham olish mumkin
+                        </span>
+
+                        <h2>
+                            500 token = 7 kun Premium
+                        </h2>
+
+                        <p>
+                            Darslar va missiyalardan token yig‘ing.
+                        </p>
+                    </div>
+
+                    <button
+                        id="tokenPremiumBtn"
+                        class="primary-btn"
+                    >
+                        500 token ishlatish
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 AI
+            ====================== -->
+
+            <section class="page" id="page-ai">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            Aqlli yordamchi
+                        </span>
+
+                        <h1>Study AI 🤖</h1>
+
+                        <p>
+                            Savolingizni yozing — Study AI tushuntirishga yordam beradi.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="ai-container">
+
+                    <div class="ai-header">
+
+                        <div class="ai-avatar">
+                            🤖
+                        </div>
+
+                        <div>
+                            <strong>Study AI</strong>
+                            <span id="aiStatus">
+                                Online
+                            </span>
+                        </div>
+
+                        <span
+                            class="ai-badge"
+                            id="aiModeBadge"
+                        >
+                            Free
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="ai-messages"
+                        id="aiMessages"
+                    >
+
+                        <div class="ai-message bot">
+                            Salom! 👋 Men Study AI. Menga matematika,
+                            ingliz tili, dasturlash yoki boshqa mavzular
+                            bo‘yicha savol berishingiz mumkin.
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        class="ai-input"
+                        id="aiForm"
+                    >
+
+                        <input
+                            type="text"
+                            id="aiInput"
+                            placeholder="Savolingizni yozing..."
+                            autocomplete="off"
+                            required
+                        >
+
+                        <button
+                            class="primary-btn"
+                            type="submit"
+                        >
+                            Yuborish
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 PROFILE
+            ====================== -->
+
+            <section class="page" id="page-profile">
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            Shaxsiy kabinet
+                        </span>
+
+                        <h1>Mening profilim</h1>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-layout">
+
+                    <div class="profile-card">
+
+                        <div class="profile-avatar-wrapper">
+
+                            <div
+                                class="avatar profile-avatar"
+                                id="profileAvatar"
+                            >
+                                U
+                            </div>
+
+                            <label class="avatar-upload">
+                                📷
+                                <input
+                                    type="file"
+                                    id="avatarInput"
+                                    accept="image/*"
+                                    hidden
+                                >
+                            </label>
+
+                        </div>
+
+                        <h2 id="profileName">
+                            User
+                        </h2>
+
+                        <p id="profileUsername">
+                            @user
+                        </p>
+
+                        <div class="profile-level">
+                            <span>
+                                Level <strong id="profileLevel">1</strong>
+                            </span>
+
+                            <span id="profileXP">
+                                0 XP
+                            </span>
+                        </div>
+
+                        <div class="progress">
+                            <span
+                                id="profileProgress"
+                                style="width:0%"
+                            ></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <h2>Profil sozlamalari</h2>
+
+                        <form id="profileForm">
+
+                            <label>
+                                Ism
+                                <input
+                                    type="text"
+                                    id="profileNameInput"
+                                >
+                            </label>
+
+                            <label>
+                                Nickname
+                                <input
+                                    type="text"
+                                    id="profileNickInput"
+                                    placeholder="Masalan: CodeMaster"
+                                >
+                            </label>
+
+                            <label>
+                                Username
+                                <input
+                                    type="text"
+                                    id="profileUsernameInput"
+                                >
+                            </label>
+
+                            <label>
+                                Bio
+                                <textarea
+                                    id="profileBioInput"
+                                    rows="4"
+                                    placeholder="O‘zingiz haqingizda..."
+                                ></textarea>
+                            </label>
+
+                            <button
+                                class="primary-btn"
+                                type="submit"
+                            >
+                                Saqlash
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <div>
+                <strong>StudyHub</strong>
+                <span>© 2026 StudyHub. Barcha huquqlar himoyalangan.</span>
+            </div>
+
+            <div class="socials">
+
+                <a href="#" onclick="return false">
+                    Telegram
+                </a>
+
+                <a href="#" onclick="return false">
+                    YouTube
+                </a>
+
+                <a href="#" onclick="return false">
+                    Instagram
+                </a>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     LESSON MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="lessonModal"
+>
+
+    <div class="modal lesson-modal">
+
+        <button
+            class="modal-close"
+            data-close="lessonModal"
+        >
+            ×
+        </button>
+
+        <div id="lessonContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PREMIUM MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="premiumModal"
+>
+
+    <div class="modal payment-modal">
+
+        <button
+            class="modal-close"
+            data-close="premiumModal"
+        >
+            ×
+        </button>
+
+        <div class="payment-icon">
+            💎
+        </div>
+
+        <h2>StudyHub Premium</h2>
+
+        <p class="modal-description">
+            Premium xizmatini yoqish uchun demo to‘lov oynasi.
+        </p>
+
+        <div class="price">
+            $4.99
+            <span>/ oy</span>
+        </div>
+
+        <div class="demo-payment">
+
+            <div class="demo-card">
+                <span>DEMO PAYMENT</span>
+                <strong>•••• •••• •••• 4242</strong>
+                <small>StudyHub Premium</small>
+            </div>
+
+            <p>
+                ⚠️ Bu frontend demo. Haqiqiy karta ma'lumotlarini
+                ushbu saytga kiritmang.
+            </p>
+
+        </div>
+
+        <button
+            id="confirmPremiumBtn"
+            class="premium-btn full-btn"
+        >
+            Demo Premiumni yoqish
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     NOTIFICATION
+========================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">
+        Muvaffaqiyatli!
+    </span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
